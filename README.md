@@ -25,5 +25,10 @@ TechPulse will leverage Python for its RSS Feed Crawler and Background Workers, 
 
 
 
+<br>
+<br>
+<br>
+<br>
+<br>
 
 **Disclaimer**: This software is provided "as-is," without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software. It is not intended for production use and may have vulnerabilities or defects; it is being developed as a learning project and may be incomplete and lack adequate test coverage. Use at your own risk.
