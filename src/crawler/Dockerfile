@@ -9,11 +9,13 @@ COPY src/crawler/ /app
 COPY pyproject.toml /app/
 COPY poetry.lock /app/
 
+# Update the image OS
+RUN apt-get update && \
+    apt-get upgrade -y
+
 # Install any needed packages specified in requirements.txt
 RUN pip install poetry && poetry install
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
-
-# Run the application using poetry
+# Run the application using poetry 
+# this is a dev configuration - we'd use poetry publish and the dist folder for prod
 CMD ["poetry", "run", "python", "main.py"]
