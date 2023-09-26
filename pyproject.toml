@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "techpulse"
+version = "0.1.0"
+description = "Learning app for a team studying Python"
+authors = ["Chris Roberts @coderandhiker"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+feedparser = "^6.0.10"
+flask = "^2.3.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
