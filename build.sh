@@ -36,4 +36,3 @@ done
 # Build Docker images with optional --no-cache flag
 docker build $NO_CACHE -f src/crawler/Dockerfile -t techpulse-crawler:dev .
 docker build $NO_CACHE -f src/web-api/Dockerfile -t techpulse-web-api:dev .
-s
