@@ -2,7 +2,7 @@
 name = "techpulse"
 version = "0.1.0"
 description = "Learning app for a team studying Python"
-authors = ["Chris Roberts @coderandhiker"]
+authors = ["Chris Roberts <chris@frostfireai.onmicrosoft.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
