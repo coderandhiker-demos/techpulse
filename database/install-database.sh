@@ -4,12 +4,8 @@
 if systemctl is-active --quiet postgresql; then
     echo "PostgreSQL service is running."
 else
-    echo "PostgreSQL service is not running. Restarting... (requires sudo)"
-    service postgresql restart
-    if [ $? -ne 0 ]; then
-        echo "Error: Failed to restart PostgreSQL service."
-        exit 1
-    fi
+    echo "PostgreSQL service is not running. Restart using: sudo service postgresql restart"
+    exit 1
 fi
 
 ERRORS=""
