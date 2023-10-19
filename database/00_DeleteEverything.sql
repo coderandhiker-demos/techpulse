@@ -1,0 +1,1 @@
+--DROP TABLE IF EXISTS article_favorites, feed_favorites, articles, rss_feeds, users;
