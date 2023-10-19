@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS  rss_feeds (
     feed_id SERIAL PRIMARY KEY,
-    url TEXT NOT NULL,
+    url TEXT NOT NULL UNIQUE,
     name VARCHAR(255),
     date_added TIMESTAMP DEFAULT NOW(),
     user_id INT REFERENCES users(user_id)

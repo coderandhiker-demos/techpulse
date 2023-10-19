@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.10"
 feedparser = "^6.0.10"
 flask = "^2.3.3"
+sqlalchemy = "^2.0.22"
 
 [build-system]
 requires = ["poetry-core"]
