@@ -1,7 +1,16 @@
 #!/bin/bash
 
-# If the service is offline, run this as sudo
-#service postgresql restart
+# Check if the PostgreSQL service is running, start if not
+if systemctl is-active --quiet postgresql; then
+    echo "PostgreSQL service is running."
+else
+    echo "PostgreSQL service is not running. Restarting... (requires sudo)"
+    sudo service postgresql restart
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to restart PostgreSQL service."
+        exit 1
+    fi
+fi
 
 ERRORS=""
 RED='\033[0;31m'
