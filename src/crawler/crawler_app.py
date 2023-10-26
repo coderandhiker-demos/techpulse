@@ -2,10 +2,12 @@ from sqlalchemy import Engine, insert, select
 from sqlalchemy.orm import Session
 from models import Article, RssFeed
 from parsers import parse_feed
+import logging
 
 class CrawlerApp():
     def __init__(self, engine:Engine):
         self.engine = engine
+        self.logger = logging.getLogger(__name__)
 
     def run(self):
         with Session(self.engine) as session:
@@ -16,6 +18,8 @@ class CrawlerApp():
             # 2. iterate through them and get data
             for (feed,) in feeds:
                 articles = parse_feed(feed.url, feed.feed_id)
+
+                self.logger.info(f'{feed.url}: {len(articles)}')
 
                 if len(articles) > 0:
                     session.add_all(articles)

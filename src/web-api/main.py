@@ -1,14 +1,13 @@
-from sqlalchemy import create_engine
-from crawler_app import CrawlerApp
-import logging
 import os
+import logging
 from dotenv import load_dotenv
+from sqlalchemy import create_engine
+from flask import Flask
+from services import RssService
 
-# load my environment vars
 load_dotenv()
 db_connection_string = os.environ.get("DB_CONNECTION_STRING")
 
-# creating a long lived connection factory, this houses connection pool
 engine = create_engine(db_connection_string)
 
 # set up a basic terminal output logger
@@ -16,11 +15,13 @@ logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
-def main():
+app = Flask(__name__)
 
-    app = CrawlerApp(engine)
-    app.run()
-    app.get_articles()
+services = []
+services.append(RssService(engine, '/rss'))
+
+for service in services:
+    app.register_blueprint(service.blueprint, url_prefix=service.url_prefix)
 
 if __name__ == '__main__':
-    main()
+    app.run()
