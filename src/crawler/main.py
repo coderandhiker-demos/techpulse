@@ -1,24 +1,26 @@
-import feedparser
+from sqlalchemy import create_engine
+from crawler_app import CrawlerApp
+import logging
+import os
+from dotenv import load_dotenv
 
-def parse_feed(url, show_content=False):
-    feed = feedparser.parse(url)
-    for entry in feed.entries:
-        print("Title:", entry.title)
-        print("Link:", entry.link)
-        print("Published:", entry.published)
-        
-        if show_content:
-            # Print the content if available
-            if hasattr(entry, 'content'):
-                print("Content:", entry.content[0].value)
-            elif hasattr(entry, 'summary'):
-                print("Content:", entry.summary)
-            else:
-                print("Content: Not available")
-        
-        print("------\n")
+# load my environment vars
+load_dotenv()
+db_connection_string = os.environ.get("DB_CONNECTION_STRING")
 
-if __name__ == "__main__":
-    #url = input("Enter the URL of the RSS Feed: ")
-    url = 'http://feeds.arstechnica.com/arstechnica/index'
-    parse_feed(url)
+# creating a long lived connection factory, this houses connection pool
+engine = create_engine(db_connection_string)
+
+# set up a basic terminal output logger
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+
+def main():
+
+    app = CrawlerApp(engine)
+    app.run()
+    app.get_articles()
+
+if __name__ == '__main__':
+    main()
