@@ -1,4 +1,5 @@
 import feedparser
+import html
 from typing import List
 from models import Article
 
@@ -12,6 +13,8 @@ def parse_feed(url: str, feed_id: int) -> List[Article]:
             content = entry.content[0].value
         elif hasattr(entry, 'summary'):
             content = entry.summary
+        # added because some embedded html broke json serialization
+        content = html.escape(content)
         article = Article(entry.title, entry.link, entry.published, content, feed_id)
         articles.append(article)
     

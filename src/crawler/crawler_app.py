@@ -23,6 +23,8 @@ class CrawlerApp():
 
                 if len(articles) > 0:
                     session.add_all(articles)
+                else:
+                    self.logger.warn(f'{feed.url} had 0 articles')
 
             # 3. save the session
             session.commit()
