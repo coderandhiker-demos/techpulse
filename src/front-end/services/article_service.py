@@ -16,3 +16,8 @@ class ArticleService(BaseService):
             result = session.execute(select(Article).limit(per_page).offset((page - 1) * per_page))
             articles = [row[0].as_dict() for row in result]
             return articles
+        
+    def get_article(self, id):
+        with Session(bind=self.engine) as session:
+            article = session.execute(select(Article).where(Article.entry_id == id)).first()[0]
+            return article

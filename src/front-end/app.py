@@ -3,6 +3,9 @@ from services import ArticleService
 from sqlalchemy import create_engine
 from dotenv import load_dotenv
 import os
+import requests
+import json
+from models import Pokemon
 
 app = Flask(__name__)
 
@@ -27,6 +30,23 @@ def index():
         return render_template('articles/articles.html', articles=articles)
     else:        
         return "Failed to fetch article data", 500
+
+@app.route('/article/<int:id>')
+def read_article(id):
+    article = article_service.get_article(id)
+    return render_template('articles/article.html', article=article)
+
+@app.route('/test')
+def test_method():   
+    url = 'https://pokeapi.co/api/v2/pokemon/ditto'
+    result = requests.get(url)
+    content = result.content.decode('utf-8')
+    # step 1 
+    data_dictionary = json.loads(content)
+
+    # step 2 create the object of a dataclass
+    #pokemon = Pokemon(**data_dictionary)
+    return render_template('pokemon/pokemon.html', item=data_dictionary)
 
 @app.route('/feeds')
 def feeds_page():
