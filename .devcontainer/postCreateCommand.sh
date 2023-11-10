@@ -1,1 +1,2 @@
 poetry install
+service postgresql restart

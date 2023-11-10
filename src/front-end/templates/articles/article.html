@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .container-fluid {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    .button-container {
+        width: 25%; /* Adjust the width as needed */
+        padding: 20px; /* Add padding for spacing */
+    }
+
+    iframe {
+        width: 100%; /* Make the iframe full width within its container */
+        flex-grow: 1;
+    }
+</style>
+
+<div class="container-fluid px-4">
+    <div class="button-container">
+        <a href="{{ url_for('articles.get_articles', page=page, per_page=per_page) }}" class="btn btn-primary">
+            <i class="fas fa-arrow-left me-2"></i>Return to Articles
+        </a>
+    </div>
+    <iframe srcdoc="{{ article.content | safe }}" width="100%"></iframe>
+</div>
+{% endblock %}

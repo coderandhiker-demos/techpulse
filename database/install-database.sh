@@ -1,12 +1,6 @@
 #!/bin/bash
 
-# Check if the PostgreSQL service is running, start if not
-if systemctl is-active --quiet postgresql; then
-    echo "PostgreSQL service is running."
-else
-    echo "PostgreSQL service is not running. Restart using: sudo service postgresql restart"
-    exit 1
-fi
+service postgresql restart
 
 ERRORS=""
 RED='\033[0;31m'
